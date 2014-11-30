@@ -13,6 +13,7 @@ public class World<T extends Member> {
 		for(int i = 0; i < s.roomCount; i++){
 			rooms.add(new Room<T>(s.recombinator,s.factory,s.memberPerRoomCount));
 		}
+		this.sortRooms();
 	}
 	public EaSettings<T> getSettings() {
 		return this.settings;
@@ -31,6 +32,7 @@ public class World<T extends Member> {
 	public void run(int count) {
 		for(int i = 0; i < count; i++){
 			this.run();
+			if(this.isFinished()) return;
 		}
 	}
 	public long getCurrentRound(){

@@ -48,21 +48,11 @@ public class WorldTest {
 	}
 	@Test
 	public void roomsSortedTest() {
-		for(Room<Company> r : w.getRooms()) {
-			
-			Company befor = r.getMembers().get(0);
-			for(Company c: r.getMembers()){
-				assertTrue(befor.getFitValue() >= c.getFitValue());
-				befor = c;
+			Room<Company> befor = w.getRooms().get(0);
+			for(Room<Company> r: w.getRooms()){
+				assertTrue(befor.getMembers().get(0).getFitValue() >= r.getMembers().get(0).getFitValue());
+				befor = r;
 			}
-			r.runOnce();
-			befor = r.getMembers().get(0);
-			for(Company c: r.getMembers()){
-				assertTrue(befor.getFitValue() >= c.getFitValue());
-				befor = c;
-			}
-		}
-
 	}
 	@Test
 	public void getBestTest(){
@@ -85,6 +75,8 @@ public class WorldTest {
 		int start = w.getBestMember().getFitValue();
 		w.run(2000);
 		int end = w.getBestMember().getFitValue();
+		System.out.println("Best start: " + start);
+		System.out.println("Best end: " + end);
 		assertTrue(start <= end);
 	}
 
