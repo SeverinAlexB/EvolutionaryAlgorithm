@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import java.util.Random;
 
-public class Room<T extends Member> {
+public class Room<T extends Member> implements Comparable<Room<T>> {
 	private long roundCount = 0;
 	private float mutationValue = 0.1f;
 	private float recombinationValue = 0.1f;
-	private ArrayList<T> members = new ArrayList<>();
+	private ArrayList<T> members;
 	private Recombinator<T> recombinator;
 	private MemberFactory<T>  factory;
 	
@@ -17,6 +17,7 @@ public class Room<T extends Member> {
 		this.recombinator = recombinator;
 		this.factory = factory;
 		if(generateMemberCount < 2) throw new EaException("It has be at least 2 members");
+		members = new ArrayList<>(generateMemberCount);
 		for(int i = 0; i < generateMemberCount; i++) {
 			members.add(factory.makeMember(random.nextDouble()));
 		}
@@ -105,6 +106,10 @@ public class Room<T extends Member> {
 	}
 	public boolean isFinished() {
 		return this.getMembers().get(0).isFinished();
+	}
+	@Override
+	public int compareTo(Room<T> r) {
+		return r.getMembers().get(0).getFitValue() - this.getMembers().get(0).getFitValue();
 	}
 	
 	
