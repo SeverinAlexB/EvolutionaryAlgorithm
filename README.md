@@ -1,4 +1,4 @@
 EvolutionaryAlgorithm
 =====================
 
-Muster implementation of a evolutionary algorithm for reuse
+Muster implementation of a evolutionary algorithm. Just for fun.
